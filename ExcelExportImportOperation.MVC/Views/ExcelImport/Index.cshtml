@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "Excel Import Flexible";
+}
+
+<h2>Excel Import (Flexible Columns)</h2>
+
+@if (ViewBag.Error != null)
+{
+    <div style="color: red">@ViewBag.Error</div>
+}
+
+@if (ViewBag.Message != null)
+{
+    <div style="color: green">@ViewBag.Message</div>
+}
+
+@using (Html.BeginForm("ImportFlexible", "ExcelImport", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <input type="file" name="file" accept=".xlsx" required />
+    <br /><br />
+    <input type="submit" value="Import Excel" />
+}
+
+<p>Make sure your Excel columns match these names (case-insensitive):</p>
+<ul>
+    <li>EmployeeID</li>
+    <li>FirstName</li>
+    <li>LastName</li>
+    <li>Email</li>
+    <li>PhoneNumber</li>
+    <li>DateOfBirth</li>
+    <li>Gender</li>
+    <li>Department</li>
+    <li>JobTitle</li>
+    <li>Manager</li>
+    <li>HireDate</li>
+    <li>Salary</li>
+    <li>Bonus</li>
+    <li>AddressLine1</li>
+    <li>AddressLine2</li>
+    <li>City</li>
+    <li>State</li>
+    <li>ZipCode</li>
+    <li>Country</li>
+    <li>EmploymentStatus</li>
+    <li>WorkLocation</li>
+    <li>OfficePhone</li>
+    <li>MobilePhone</li>
+    <li>EmergencyContactName</li>
+    <li>EmergencyContactPhone</li>
+    <li>MaritalStatus</li>
+    <li>EducationLevel</li>
+    <li>Certifications</li>
+    <li>Languages</li>
+    <li>Notes</li>
+</ul>
