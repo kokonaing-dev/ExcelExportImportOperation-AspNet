@@ -4,6 +4,7 @@ namespace ExcelExportImportOperation.MVC.Services;
 
 public interface IEmployeeService
 {
+    List<Employee> GetEmployees();
     Task SaveToDatabaseAsync(List<DataRowModel> data);
 }
 
@@ -14,6 +15,11 @@ public class EmployeeService : IEmployeeService
     public EmployeeService(AppDbContext context)
     {
         _context = context;
+    }
+
+    public List<Employee> GetEmployees()
+    {
+        return _context.Employees.ToList();
     }
 
     public async Task SaveToDatabaseAsync(List<DataRowModel> data)

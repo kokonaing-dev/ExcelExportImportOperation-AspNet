@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Excel Import Flexible";
+    ViewBag.Title = "Excel Import/Export";
 }
 
 <h2>Excel Import (Flexible Columns)</h2>
@@ -14,11 +14,19 @@
     <div style="color: green">@ViewBag.Message</div>
 }
 
-@using (Html.BeginForm("ImportFlexible", "ExcelImport", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Import", "Excel", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <input type="file" name="file" accept=".xlsx" required />
-    <br /><br />
+    <br />
+    <br />
     <input type="submit" value="Import Excel" />
+}
+
+<br />
+<br />
+@using (Html.BeginForm("Export", "Excel", FormMethod.Get))
+{
+    <input type="submit" value="Export Excel" />
 }
 
 <p>Make sure your Excel columns match these names (case-insensitive):</p>

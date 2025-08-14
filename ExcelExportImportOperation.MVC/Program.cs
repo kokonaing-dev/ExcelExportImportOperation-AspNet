@@ -13,6 +13,7 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 }, ServiceLifetime.Transient, ServiceLifetime.Transient);
 
 builder.Services.AddScoped<IExcelImportService, ExcelImportService>();
+builder.Services.AddScoped<IExcelExportService, ExcelExportService>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 
 var app = builder.Build();

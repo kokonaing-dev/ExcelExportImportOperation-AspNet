@@ -5,18 +5,21 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ExcelExportImportOperation.MVC.Controllers;
 
-public class ExcelImportController : Controller
+public class ExcelController : Controller
 {
 
     private readonly IExcelImportService _excelImportService;
+    private readonly IExcelExportService _excelExportService;
     private readonly IEmployeeService _employeeService;
 
-    public ExcelImportController(IExcelImportService excelImportService, IEmployeeService employeeService)
+    public ExcelController(IExcelImportService excelImportService, IEmployeeService employeeService, IExcelExportService excelExportService)
     {
         _excelImportService = excelImportService;
         _employeeService = employeeService;
+        _excelExportService = excelExportService;
     }
 
+    [HttpGet]
     public ActionResult Index()
     {
         return View();
@@ -24,7 +27,7 @@ public class ExcelImportController : Controller
 
 
     [HttpPost]
-    public async Task<IActionResult> ImportFlexible(IFormFile file)
+    public async Task<IActionResult> Import(IFormFile file)
     {
         if (file == null || file.Length == 0)
         {
@@ -45,5 +48,16 @@ public class ExcelImportController : Controller
         }
 
         return View("Index");
+    }
+
+    [HttpGet]
+    public IActionResult Export()
+    {
+        var employees = _employeeService.GetEmployees();
+        var fileContent = _excelExportService.ExportEmployees(employees);
+
+        return File(fileContent,
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            "Employees.xlsx");
     }
 }
